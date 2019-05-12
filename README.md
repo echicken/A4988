@@ -21,7 +21,8 @@ The _ms1_, _ms2_, and _ms3_ parameters are optional, but required if you want mi
 
 * **direction** - _boolean_ - Clockwise or counterclockwise, depending on wiring
 * **delay** - _number_ - Milliseconds between steps (pulses)
-* **step_size** - _string_ - 'full', 'half', 'quarter', 'eighth', or 'sixteenth' (ms1, ms2, and ms3 must be wired up and provided to constructor)
+* **step_size** - _string_ - 'full', 'half', 'quarter', 'eighth', or 'sixteenth'
+    * ms1, ms2, and ms3 must be wired up and provided to constructor
 
 ### Methods
 
