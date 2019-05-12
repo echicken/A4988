@@ -96,7 +96,7 @@ class A4988 extends EventEmitter {
 
     _turn(steps, res) {
         if (this._abort) {
-            this.emit('stop', steps);
+            this.emit('stop', this._steps);
             res(this._steps);
             return;
         }
@@ -105,7 +105,7 @@ class A4988 extends EventEmitter {
         this._step.digitalWrite(false);
         if (this._steps == steps) {
             this.emit('stop', this._steps);
-            res(steps);
+            res(this._steps);
             return;
         }
         setTimeout(() => this._turn(steps, res), this._delay);
