@@ -11,6 +11,7 @@ class A4988 extends EventEmitter {
         this._delay = 1;
         this._direction = false;
         this._steps = 0;
+        this._step_size = 'FULL';
 
         this._step = new Gpio(step, { mode: Gpio.OUTPUT });
         this._dir = new Gpio(dir, { mode: Gpio.OUTPUT });;
@@ -50,7 +51,11 @@ class A4988 extends EventEmitter {
         this._direction = d;
     }
 
-    step_size(ss) {
+    get step_size() {
+        return this._step_size;
+    }
+
+    set step_size(ss) {
         if (!this._ms1) return;
         if (typeof ss != 'string') throw `'step_size' must be a string (${ss})`;
         switch (ss.toUpperCase()) {
@@ -58,26 +63,31 @@ class A4988 extends EventEmitter {
                 this._ms1.digitalWrite(false);
                 this._ms2.digitalWrite(false);
                 this._ms3.digitalWrite(false);
+                this._step_size = 'FULL';
                 break;
             case 'HALF':
                 this._ms1.digitalWrite(true);
                 this._ms2.digitalWrite(false);
                 this._ms3.digitalWrite(false);
+                this._step_size = 'HALF';
                 break;
             case 'QUARTER':
                 this._ms1.digitalWrite(false);
                 this._ms2.digitalWrite(true);
                 this._ms3.digitalWrite(false);
+                this._step_size = 'QUARTER';
                 break;
             case 'EIGHTH':
                 this._ms1.digitalWrite(true);
                 this._ms2.digitalWrite(true);
                 this._ms3.digitalWrite(false);
+                this._step_size = 'EIGHTH';
                 break;
             case 'SIXTEENTH':
                 this._ms1.digitalWrite(true);
                 this._ms2.digitalWrite(true);
                 this._ms3.digitalWrite(true);
+                this._step_size = 'SIXTEENTH';
                 break;
             default:
                 break;
