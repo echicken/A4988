@@ -10,7 +10,7 @@ a4988.turn(5000).then(steps => console.log(`Turned ${steps} steps`));
 ### Constructor
 
 ```javascript
-new A4988(step, direction_[, ms1, ms2, ms3]_);
+new A4988(step, direction, ms1, ms2, ms3); // ms1, ms2, and ms3 are optional
 ```
 
 All parameters are BCM GPIO pin numbers wired to the corresponding A4988 pins.
