@@ -3,7 +3,7 @@ const Gpio = require('pigpio').Gpio;
 
 class A4988 extends EventEmitter {
 
-    constructor({ step = 6, dir = 5, ms1 = 26, ms2 = 19, ms3 = 13 } = {}) {
+    constructor({ step = 6, dir = 5, ms1 = 0, ms2 = 0, ms3 = 0 } = {}) {
 
         super();
 
@@ -14,15 +14,20 @@ class A4988 extends EventEmitter {
 
         this._step = new Gpio(step, { mode: Gpio.OUTPUT });
         this._dir = new Gpio(dir, { mode: Gpio.OUTPUT });;
-        this._ms1 = new Gpio(ms1, { mode: Gpio.OUTPUT });
-        this._ms2 = new Gpio(ms2, { mode: Gpio.OUTPUT });
-        this._ms3 = new Gpio(ms3, { mode: Gpio.OUTPUT });
-
         this._step.digitalWrite(false);
         this._dir.digitalWrite(false);
-        this._ms1.digitalWrite(false);
-        this._ms2.digitalWrite(false);
-        this._ms3.digitalWrite(false);
+
+        if (ms1 && ms2 && ms3) {
+
+            this._ms1 = new Gpio(ms1, { mode: Gpio.OUTPUT });
+            this._ms2 = new Gpio(ms2, { mode: Gpio.OUTPUT });
+            this._ms3 = new Gpio(ms3, { mode: Gpio.OUTPUT });
+
+            this._ms1.digitalWrite(false);
+            this._ms2.digitalWrite(false);
+            this._ms3.digitalWrite(false);
+
+        }
 
     }
 
@@ -46,6 +51,7 @@ class A4988 extends EventEmitter {
     }
 
     step_size(ss) {
+        if (!this._ms1) return;
         if (typeof ss != 'string') throw `'step_size' must be a string (${ss})`;
         switch (ss.toUpperCase()) {
             case 'FULL':
@@ -81,14 +87,14 @@ class A4988 extends EventEmitter {
     _turn(steps, res) {
         if (this._abort) {
             this.emit('stop', steps);
-            res(steps);
+            res(this._steps);
             return;
         }
         this._steps++;
         this._step.digitalWrite(true);
         this._step.digitalWrite(false);
         if (this._steps == steps) {
-            this.emit('stop', steps);
+            this.emit('stop', this._steps);
             res(steps);
             return;
         }
