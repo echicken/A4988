@@ -1,0 +1,29 @@
+{
+  "name": "a4988",
+  "version": "1.0.0",
+  "description": "Use an A4988 stepper motor controller on a Raspberry Pi with node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/echicken/A4988.git"
+  },
+  "dependencies": {
+    "pigpio": "~1.2.2"  
+  },
+  "keywords": [
+    "a4988",
+    "stepper",
+    "motor",
+    "raspberry",
+    "pi"
+  ],
+  "author": "echicken",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/echicken/A4988/issues"
+  },
+  "homepage": "https://github.com/echicken/A4988#readme"
+}
