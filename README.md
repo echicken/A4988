@@ -15,7 +15,7 @@ new A4988(step, direction, ms1, ms2, ms3);
 
 All parameters are BCM GPIO pin numbers wired to the corresponding A4988 pins.
 
-The _ms1_, _ms2_, and _ms3_ parameters are optional, but required if you want microstepping (__step_size__ below)
+The _ms1_, _ms2_, and _ms3_ parameters are optional, but required if you want microstepping (_step_size_ below)
 
 ### Properties
 
