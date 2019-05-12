@@ -1,11 +1,8 @@
-const EventEmitter = require('events');
 const Gpio = require('pigpio').Gpio;
 
-class A4988 extends EventEmitter {
+class A4988 {
 
-    constructor({ step = 6, dir = 5, ms1 = 0, ms2 = 0, ms3 = 0 } = {}) {
-
-        super();
+    constructor(step = 6, dir = 5, ms1 = 0, ms2 = 0, ms3 = 0) {
 
         this._abort = false;
         this._delay = 1;
@@ -104,30 +101,20 @@ class A4988 extends EventEmitter {
         this._step.digitalWrite(true);
         this._step.digitalWrite(false);
         if (this._steps == steps) {
-            this.emit('stop', this._steps);
             res(this._steps);
             return;
         }
         setTimeout(() => this._turn(steps, res), this._delay);
     }
 
-    turn(steps = 1, dir, delay) {
+    turn(steps = 1, callback) {
         this._steps = 0;
         this._abort = false;
-        return new Promise((res, rej) => {
-            try {
-                if (typeof dir != 'undefined' && this._direction != dir) {
-                    this.direction = dir;
-                    this._dir.digitalWrite(dir);
-                }
-                if (typeof delay != 'undefined' && this._delay != delay) {
-                    this.delay = delay;
-                }
-            } catch (err) {
-                rej(err);
-            }
-            this._turn(steps, res);
-        });
+        if (typeof callback == 'function') {
+            this._turn(steps, callback);
+        } else {
+            return new Promise(res => this._turn(steps, res));
+        }
     }
 
     stop() {
