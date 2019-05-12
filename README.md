@@ -25,5 +25,5 @@ ms1, ms2, ms3 are optional, but required if you want microstepping (step_size be
 
 ### Methods
 
-* **turn(steps_[, callback]_)** - Will fire _callback_ when turn is complete (or aborted).  If _callback_ not given, returns a Promise
+* **turn(steps _[, callback]_)** - Will fire _callback_ when turn is complete (or aborted).  If _callback_ not given, returns a Promise
 * **stop()** - Abort a turn in progress
