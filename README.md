@@ -9,7 +9,9 @@ a4988.turn(5000).then(steps => console.log(`Turned ${steps} steps`));
 
 ### Constructor
 
-* new A4988(step, direction, ms1, ms2, ms3)
+```javascript
+new A4988(step, direction, ms1, ms2, ms3);
+```
 
 All parameters are BCM GPIO pin numbers wired to the corresponding A4988 pins.
 
@@ -17,11 +19,11 @@ ms1, ms2, ms3 are optional, but required if you want microstepping (step_size be
 
 ### Properties
 
-* *direction* - _boolean_ - Clockwise or counterclockwise, depending on wiring
-* *delay* - _number_ - Milliseconds between steps (pulses)
-* *step_size* - _string_ - full, half, quarter, eighth, or sixteenth
+* **direction** - _boolean_ - Clockwise or counterclockwise, depending on wiring
+* **delay** - _number_ - Milliseconds between steps (pulses)
+* **step_size** - _string_ - 'full', 'half', 'quarter', 'eighth', or 'sixteenth'
 
 ### Methods
 
-* *turn(steps[, callback])* - Will fire _callback_ when turn is complete.  If _callback_ not given, returns a promise
-* *stop()* - Abort a turn in progress
+* **turn(steps[, callback])** - Will fire _callback_ when turn is complete (or aborted).  If _callback_ not given, returns a Promise
+* **stop()** - Abort a turn in progress
