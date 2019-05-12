@@ -111,16 +111,20 @@ class A4988 extends EventEmitter {
         setTimeout(() => this._turn(steps, res), this._delay);
     }
 
-    turn(steps = 1, direction, delay) {
+    turn(steps = 1, dir, delay) {
+        this._steps = 0;
+        this._abort = false;
         return new Promise((res, rej) => {
-            this._steps = 0;
-            this._abort = false;
-            if (typeof direction != 'undefined' && this._direction != direction) {
-                this.direction = direction;
-                this._dir.digitalWrite(direction);
-            }
-            if (typeof delay != 'undefined' && this._delay != delay) {
-                this.delay = delay;
+            try {
+                if (typeof dir != 'undefined' && this._direction != dir) {
+                    this.direction = dir;
+                    this._dir.digitalWrite(dir);
+                }
+                if (typeof delay != 'undefined' && this._delay != delay) {
+                    this.delay = delay;
+                }
+            } catch (err) {
+                rej(err);
             }
             this._turn(steps, res);
         });
