@@ -2,13 +2,14 @@ const Gpio = require('pigpio').Gpio;
 
 class A4988 {
 
-    constructor(step = 6, dir = 5, ms1 = 0, ms2 = 0, ms3 = 0) {
+    constructor({ step = 6, dir = 5, ms1 = 0, ms2 = 0, ms3 = 0, enable = 0 }) {
 
         this._abort = false;
         this._delay = 1;
         this._direction = false;
         this._steps = 0;
         this._step_size = 'FULL';
+        this._enabled = true;
 
         this._step = new Gpio(step, { mode: Gpio.OUTPUT });
         this._dir = new Gpio(dir, { mode: Gpio.OUTPUT });;
@@ -25,6 +26,11 @@ class A4988 {
             this._ms2.digitalWrite(false);
             this._ms3.digitalWrite(false);
 
+        }
+
+        if (enable) {
+            this._enable = new Gpio(enable, { mode: Gpio.OUTPUT });
+            this._enable.digitalWrite(false);
         }
 
     }
@@ -89,6 +95,20 @@ class A4988 {
                 break;
             default:
                 break;
+        }
+    }
+
+    get enable() {
+        return this._enabled;
+    }
+
+    set enable(e) {
+        if (e) {
+            this._enable.digitalWrite(false);
+            this._enabled = true;
+        } else {
+            this._enable.digitalWrite(true);
+            this._enabled = false;
         }
     }
 
