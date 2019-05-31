@@ -28,4 +28,5 @@ The _ms1_, _ms2_, and _ms3_ parameters are optional, but required if you want mi
 ### Methods
 
 * **turn(steps _[, callback]_)** - Will fire _callback_ when turn is complete (or aborted).  If _callback_ not given, returns a Promise
+    * Return value (or callback param) is the number of steps actually taken, which may vary from _steps_ if _stop()_ was called and the turn was aborted prematurely.
 * **stop()** - Abort a turn in progress
