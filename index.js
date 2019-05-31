@@ -46,6 +46,7 @@ class A4988 {
     set direction(d) {
         if (typeof d != 'boolean') throw `'direction' must be boolean (${d})`;
         this._direction = d;
+        this._dir.digitalWrite(d);
     }
 
     get step_size() {
@@ -93,7 +94,6 @@ class A4988 {
 
     _turn(steps, res) {
         if (this._abort) {
-            this.emit('stop', this._steps);
             res(this._steps);
             return;
         }
