@@ -98,11 +98,11 @@ class A4988 {
         }
     }
 
-    get enable() {
+    get enabled() {
         return this._enabled;
     }
 
-    set enable(e) {
+    set enabled(e) {
         if (e) {
             this._enable.digitalWrite(false);
             this._enabled = true;
