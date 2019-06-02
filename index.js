@@ -112,6 +112,18 @@ class A4988 {
         }
     }
 
+    enable() {
+        this._enable.digitalWrite(false);
+        this._enabled = true;
+        return new Promise(res => setTimeout(res, 5));
+    }
+
+    disable() {
+        this._enable.digitalWrite(true);
+        this._enabled = false;
+        return new Promise(res => setTimeout(res, 5));
+    }
+
     _turn(steps, res) {
         if (this._abort) {
             res(this._steps);
