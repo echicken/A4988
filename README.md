@@ -3,14 +3,14 @@ Use an A4988 stepper motor controller on a Raspberry Pi with node.js
 
 ```javascript
 const A4988 = require('A4988');
-const a4988 = new A4988({ step: 6, direction: 5 });
+const a4988 = new A4988({ step: 6, dir: 5 });
 a4988.turn(5000).then(steps => console.log(`Turned ${steps} steps`));
 ```
 
 ### Constructor
 
 ```javascript
-new A4988({ step: 26, direction: 19, ms1: 13, ms2: 6, ms3: 5, enable: 22 }); // ms1, ms2, ms3, and enable are optional
+new A4988({ step: 26, dir: 19, ms1: 13, ms2: 6, ms3: 5, enable: 22 }); // ms1, ms2, ms3, and enable are optional
 ```
 
 All parameters are BCM GPIO pin numbers wired to the corresponding A4988 pins.
