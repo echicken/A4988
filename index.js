@@ -147,6 +147,7 @@ class A4988 {
     }
 
     turn(steps = 1, callback) {
+        if (this._turning) return Promise.reject(new Error('Motor already running'));
         this._steps = 0;
         this._abort = false;
         this._turning = true;
