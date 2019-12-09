@@ -135,7 +135,11 @@ class A4988 {
             res(this._steps);
             return;
         }
-        this._steps++;
+        if (this._steps < steps) {
+            this._steps++;
+        } else {
+            this._steps--;
+        }               
         this._step.digitalWrite(true);
         this._step.digitalWrite(false);
         if (this._steps == steps) {
@@ -151,6 +155,11 @@ class A4988 {
         this._steps = 0;
         this._abort = false;
         this._turning = true;
+        if (this._steps < steps) {
+            this._dir.digitalWrite(true);
+        } else {
+            this._dir.digitalWrite(false);
+        }
         if (typeof callback == 'function') {
             this._turn(steps, callback);
         } else {
